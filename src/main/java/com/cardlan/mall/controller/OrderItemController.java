@@ -1,6 +1,7 @@
 package com.cardlan.mall.controller;
 import com.cardlan.mall.bean.OrderItemVo;
 import com.cardlan.mall.common.core.Result;
+import com.cardlan.mall.common.core.ServiceException;
 import com.cardlan.mall.model.OrderItem;
 import com.cardlan.mall.service.OrderItemService;
 import com.github.pagehelper.PageHelper;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import javax.validation.Valid;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -60,9 +62,31 @@ public class OrderItemController {
         return Result.success(pageInfo);
     }
 
+//    @PostMapping("/select")
+//    public String list(@RequestBody OrderItem orderItem) {
+//        String name = "";
+//        try {
+//            List<OrderItem> list = orderItemService.find(orderItem);
+//            OrderItem item = list.get(10);
+//            name = item.getItemName();
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//            throw new ServiceException("111111111111");
+//        }
+//        return name;
+//    }
+
     @PostMapping("/select")
-    public List list(@RequestBody OrderItem orderItem) {
-        List<OrderItem> list = orderItemService.find(orderItem);
-        return list;
+    public String list(@RequestBody OrderItem orderItem) {
+        String name = "";
+        try {
+            List<OrderItem> list = orderItemService.find(orderItem);
+            OrderItem item = list.get(10);
+            name = item.getItemName();
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new ServiceException("111111111111");
+        }
+        return name;
     }
 }

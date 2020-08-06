@@ -26,10 +26,11 @@ public class ServiceException extends RuntimeException {
     }
 
     public ServiceException() {
+        this(500,"服务异常，请联系管理员");
     }
 
     public ServiceException(String msg) {
-        super(msg);
+        this(500,msg);
     }
 
     public ServiceException(int code, String msg) {
